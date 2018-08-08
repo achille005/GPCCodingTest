@@ -6,3 +6,5 @@ How to run this application (impolemented as springBoot Service):
 3.	Right click > Run As > Spring Boot App
 4.	Use Chrome Poster or Postman and input INPUTs as shown below on end point
  	http://localhost:9596/api/tax/calculate  (note that the port is predefined in the application.property file)
+
+NOTE: see README.doc on the project 
