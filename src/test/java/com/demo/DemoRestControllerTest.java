@@ -1,6 +1,7 @@
 package com.demo;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +39,22 @@ public class DemoRestControllerTest {
 		expect += "Total: 29.83";
 		String output = response.getBody().replace("\n", "");
 		assertEquals(expect, output);
+	}
+	
+
+	@Test
+	public void case1_failed() throws Exception {
+		String request = "BAD BAD 1 book at 12.49\\n1 music CD at 14.99\\n1 chocolate bar at 0.85";
+		TestRestTemplate restTemplate = new TestRestTemplate();
+		ResponseEntity<String> response = restTemplate.postForEntity(URL, request, String.class);
+		assertEquals(200, response.getStatusCodeValue());
+		String expect = "1 book: 12.49";
+		expect += "1 music CD: 16.49";
+		expect += "1 chocolate bar: 0.85";
+		expect += "Sales Taxes: 1.5";
+		expect += "Total: 29.83";
+		String output = response.getBody().replace("\n", "");
+		assertNotEquals(expect, output);
 	}
 	
 }
