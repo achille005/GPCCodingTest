@@ -18,11 +18,15 @@ public class TaxServiceImpl implements TaxService {
 	@Override
 	public String tax(String content) {
 		List<Item> items = new ArrayList<Item>();
-		new BufferedReader(new StringReader(content.trim())).lines().forEach(
+		for(String line : content.trim().split("\\\\n")) {
+			items.add(parseStringToItem(line));
+		}
+		/*new BufferedReader(new StringReader(content.trim())).lines().forEach(
 			(line) -> {
 				items.add(parseStringToItem(line));
 			}
-	    );		
+
+	    );*/		
 		SalesTax salesTax = new SalesTax();
 		String result = "";
 		BigDecimal saleTaxes = BigDecimal.valueOf(0);
